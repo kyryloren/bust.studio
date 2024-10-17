@@ -36,10 +36,6 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => `rgb(${theme.text})`};
     overscroll-behavior-y: none;
   }
-  
-  main {
-    overflow-x: hidden;
-  }
 
   .overflow {
     overflow: hidden;

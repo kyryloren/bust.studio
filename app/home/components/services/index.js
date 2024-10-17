@@ -1,7 +1,7 @@
 'use client'
 
-import { useRef, useState } from 'react'
-import { Container, LargeText, NormalText } from 'styles'
+import { useEffect, useRef } from 'react'
+import { Container, LargeText, MediumLargeText, NormalText } from 'styles'
 import {
   CenterCol,
   ContentCol,
@@ -9,14 +9,10 @@ import {
   LeftCol,
   RightCol,
   ServicesWrapper,
+  StickyWrapper,
   TitleRow,
 } from './styles'
 import { CustomButton } from 'components'
-import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-import ScrollTrigger from 'gsap/dist/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const servicesList = [
   {
@@ -38,6 +34,30 @@ const servicesList = [
 ]
 
 const Services = () => {
+  const container = useRef()
+  const titleRefs = useRef([])
+  const wrapperRef = useRef([])
+
+  useEffect(() => {
+    wrapperRef.current.forEach((el, index, array) => {
+      const totalElements = array.length
+      const reverseIndex = totalElements - 1 - index // Reverse the index to start from the last element
+
+      el.style.setProperty(
+        '--top',
+        index === 0
+          ? '0px'
+          : `${titleRefs.current[index]?.clientHeight * index}px`,
+      )
+
+      // Calculate marginBottom in reverse order
+      el.style.marginBottom =
+        reverseIndex === 0
+          ? '0px'
+          : `${titleRefs.current[reverseIndex]?.clientHeight * reverseIndex}px`
+    })
+  }, [])
+
   return (
     <ServicesWrapper>
       <Container>
@@ -56,18 +76,29 @@ const Services = () => {
           </RightCol>
         </TitleRow>
 
-        {servicesList.map((service, index) => (
-          <InfoRow key={index} first={index === 0}>
-            <LeftCol>
-              <NormalText>0{index + 1}</NormalText>
-            </LeftCol>
-            <ContentCol>
-              <LargeText>{service.name}</LargeText>
-              <NormalText>{service.description}</NormalText>
-              <CustomButton href={'/services'}>Learn more</CustomButton>
-            </ContentCol>
-          </InfoRow>
-        ))}
+        <div
+          ref={container}
+          style={{ display: 'flex', flexDirection: 'column' }}
+        >
+          {servicesList.map((service, index) => (
+            <StickyWrapper ref={(el) => (wrapperRef.current[index] = el)}>
+              <InfoRow>
+                <LeftCol>
+                  <NormalText>0{index + 1}</NormalText>
+                </LeftCol>
+                <ContentCol>
+                  <MediumLargeText
+                    ref={(el) => (titleRefs.current[index] = el)}
+                  >
+                    {service.name}
+                  </MediumLargeText>
+                  <NormalText>{service.description}</NormalText>
+                  <CustomButton href={'/services'}>Learn more</CustomButton>
+                </ContentCol>
+              </InfoRow>
+            </StickyWrapper>
+          ))}
+        </div>
       </Container>
     </ServicesWrapper>
   )

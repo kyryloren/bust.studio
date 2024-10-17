@@ -1,6 +1,6 @@
 'use client'
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { GridWrapper, SectionWrapper, Z_INDEX } from 'styles'
 
 export const ServicesWrapper = styled(SectionWrapper)`
@@ -11,6 +11,7 @@ export const TitleRow = styled(GridWrapper)`
 `
 export const LeftCol = styled.div`
   grid-column: 1 / 3;
+  padding-top: 3vw;
 `
 export const CenterCol = styled.div`
   grid-column: 4 / 11;
@@ -19,17 +20,26 @@ export const RightCol = styled.div`
   grid-column: 11 / -1;
   text-align: right;
 `
+export const StickyWrapper = styled.div`
+  --top: 0;
+  position: sticky;
+  top: var(--top);
+`
 export const InfoRow = styled(GridWrapper)`
-  ${({ first, theme }) =>
-    first && `border-top: 1px dashed rgb(${theme.black});`}
-  border-bottom: 1px dashed ${({ theme }) => `rgb(${theme.black})`};
-  padding: 3vw 0;
-  height: 80vh;
+  border-top: 1px dashed ${({ theme }) => `rgb(${theme.black})`};
+  padding-bottom: 3vw;
   background-color: ${({ theme }) => `rgb(${theme.body})`};
+  height: 365px;
 `
 export const ContentCol = styled.div`
   grid-column: 4 / 8;
   display: flex;
   flex-direction: column;
-  gap: 2vw;
+
+  h3 {
+    padding: 3vw 0;
+  }
+  a {
+    padding-top: 3vw;
+  }
 `

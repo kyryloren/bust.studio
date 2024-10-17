@@ -41,7 +41,7 @@ const Project = () => {
               Explore Project
             </CustomButton>
           </ImageOverlay>
-          <CustomImage src={'/soros.webp'} alt={'SOROS'} />w
+          <CustomImage src={'/soros.webp'} alt={'SOROS'} />
         </ImageWrapper>
       </Container>
     </ProjectWrapper>

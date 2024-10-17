@@ -18,6 +18,8 @@ export {
   MediumText,
   Huge,
   HugeText,
+  MediumLarge,
+  MediumLargeText,
 } from './text'
 export { default as SectionWrapper } from './section'
 export { default as Z_INDEX } from './z'

@@ -27,10 +27,22 @@ export const MediumText = styled.p`
   ${Normal}
   margin: 0;
 `
+export const MediumLarge = css`
+  // 36 > 48
+  font-size: ${pxCutOff(48)};
+  font-weight: 500;
+  line-height: 1;
+
+  ${media.desktopL`font-size: clamp(2.25rem, 1.9859rem + 1.1268vw, 3rem);`}
+`
+export const MediumLargeText = styled.h3`
+  ${MediumLarge}
+  margin: 0;
+`
 export const Large = css`
   // 56 > 64
   font-size: ${pxCutOff(64)};
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1;
 
   ${media.desktopL`font-size: clamp(3.5rem, 3.3239rem + 0.7512vw, 4rem);`}
@@ -42,7 +54,7 @@ export const LargeText = styled.h2`
 export const Huge = css`
   // 56 > 64
   font-size: ${pxCutOff(128)};
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1;
 
   ${media.desktopL`font-size: clamp(4rem, 2.5915rem + 6.0094vw, 8rem);`}
